@@ -26,6 +26,7 @@ Fluent API så det fungerar
 Done:
 
 Göra alla klasser i VS
+Göra Interfaces
 
 Ladda hem:
 Nuget och Entity Framework Core 
