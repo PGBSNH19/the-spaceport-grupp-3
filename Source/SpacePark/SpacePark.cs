@@ -11,5 +11,10 @@
         {
             
         }
+            
+        public bool ParkSpaceShip(ParkingLot parkingLot)
+        {
+
+        }
     }
 }
