@@ -1,6 +1,10 @@
-﻿namespace SpacePark
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace SpacePark
 {
-    interface IParkingLot
+    public interface IParkingLot
     {
         int Length { get; set; }
         int ParkingID { get; set; }

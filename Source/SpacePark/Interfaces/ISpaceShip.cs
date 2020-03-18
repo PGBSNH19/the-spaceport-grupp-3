@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SpacePark.Interfaces
+namespace SpacePark
 {
-    interface ISpaceShip
+    public interface ISpaceShip
     {
         int SpaceShipID { get; set; }
         string Name { get; set; }
