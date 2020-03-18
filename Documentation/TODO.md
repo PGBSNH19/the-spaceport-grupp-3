@@ -18,13 +18,10 @@ Från beskrivning:
 - Create unit tests, where possible.
 - ![image-20200318154509858](C:\Users\Benka1\AppData\Roaming\Typora\typora-user-images\image-20200318154509858.png)
 
-
-
 TODO:
 
-
-
-
+Läsa api
+Fluent API så det fungerar
 
 Done:
 
