@@ -1,9 +1,9 @@
 ﻿namespace SpacePark
 {
-    class SpaceShip
+    public class SpaceShip : ISpaceShip
     {
-        int SpaceShipID { get; set; }
-        string Name { get; set; }
-        int Length { get; set; }
+        public int SpaceShipID { get; set; }
+        public string Name { get; set; }
+        public int Length { get; set; }
     }
 }
