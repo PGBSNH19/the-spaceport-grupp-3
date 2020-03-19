@@ -8,26 +8,8 @@ namespace SpacePark
 
     class Program
     {
-        static async Task<string> CreatePersonFromAPI(string name) 
-        {
-            if (IsValidPerson(name).Result)
-            {
-                var person = new Person();
-                foreach (var item in results)
-                {
-
-                Console.WriteLine(response);
-
-            }
-            
-
-            return peopleResponse;
-
-        }
         static async Task<bool> IsValidPerson(string name)
         {
-            
-            
             var client = new RestClient("https://swapi.co/api/");
             var request = new RestRequest($"people/?search={name}", DataFormat.Json);
             var peopleResponse = client.Get<PersonSearch>(request);
@@ -36,29 +18,42 @@ namespace SpacePark
             {
                 if (p.Name == name)
                 {
+                    CreatePersonFromAPI();
+
+                    foreach (var starship in peopleResponse.Data.starships)
+                    {
+                        Console.WriteLine(starship);
+                    }
+
+                    CreateStarshipFromAPI();
                     return true;
                 }
             }
             return false;
         }
 
-       }
+        public static void CreateStarshipFromAPI() 
+        {
+            //var client = new RestClient("https://swapi.co/api/");
+            //var request = new RestRequest($"people/?search=", DataFormat.Json);
+            //var peopleResponse = client.Get<PersonSearch>(request);
+        }
+
+        public static void CreatePersonFromAPI()  
+        {
+            
+        }
 
         static void Main(string[] args)
         {
-           var parking =new SpacePark().IsValidPerson(x=> x.Name == Console.ReadLine()).creat
-
-            Console.WriteLine(IsValidPerson(tempPerson.Name).Result);
-            Console.WriteLine(IsValidPerson("Fel namn").Result);
-
-
-
+            IsValidPerson("Luke Skywalker");
         }
 
     }
 
     public class PersonSearch
     {
+        public List<string> starships { get; set; }
         public List<Person> results { get; set; }
     }
 }

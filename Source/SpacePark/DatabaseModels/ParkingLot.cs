@@ -3,7 +3,7 @@
 
 namespace SpacePark
 {
-    public class ParkingLot : IParkingLot
+    public class ParkingLot
     {
         public int ParkingID { get; set; }
         public int Length { get; set; }
