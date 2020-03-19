@@ -12,6 +12,7 @@ namespace SpacePark
         static async Task<bool> IsValidPerson(string name)
         {
             var client = new RestClient("https://swapi.co/api/");
+<<<<<<< HEAD
             var request =  new RestRequest($"people/?search={name}", DataFormat.Json);
             var peopleResponse = client.Get<PersonSearch>(request);
 =======
