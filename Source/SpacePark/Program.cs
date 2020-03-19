@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace SpacePark
 {
@@ -14,18 +15,14 @@ namespace SpacePark
             var request = new RestRequest($"people/?search={name}", DataFormat.Json);
             var peopleResponse = client.Get<PersonSearch>(request);
 
+
+            Console.WriteLine(peopleResponse.Data.starships.Count);
+
+
             foreach (var p in peopleResponse.Data.results)
             {
                 if (p.Name == name)
                 {
-                    CreatePersonFromAPI();
-
-                    foreach (var starship in peopleResponse.Data.starships)
-                    {
-                        Console.WriteLine(starship);
-                    }
-
-                    CreateStarshipFromAPI();
                     return true;
                 }
             }
@@ -46,7 +43,7 @@ namespace SpacePark
 
         static void Main(string[] args)
         {
-            IsValidPerson("Luke Skywalker");
+            IsValidPerson("Chewbacca");
         }
 
     }
