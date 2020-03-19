@@ -15,7 +15,7 @@ namespace SpacePark
                 var request = new RestRequest("starships", DataFormat.Json);
                 var response = client.Get(request);
 
-                Console.WriteLine(response.ToString());
+                Console.WriteLine(response.result[0].name.ToString());
 
                 return response.ToString();
             }
