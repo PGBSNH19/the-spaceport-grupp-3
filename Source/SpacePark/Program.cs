@@ -8,26 +8,36 @@ namespace SpacePark
 
     class Program
     {
-        static async Task<string> getapi()
+
+        static async Task<bool> IsValidPerson(string name)
         {
-            List<Person> results = new List<Person>();
             var client = new RestClient("https://swapi.co/api/");
-            var request = new RestRequest($"people/?search=Skywalker", DataFormat.Json);
-            var peopleResponse = client.Get<Person>(request);
+            var request =  new RestRequest($"people/?search={name}", DataFormat.Json);
+            var peopleResponse = client.Get<PersonSearch>(request);
 
-
-            foreach (var p in results)
+            foreach (var p in peopleResponse.Data.results)
             {
-                Console.WriteLine(p.Name);
+                if (p.Name == name)
+                {
+                    
+                    return true;
+                }
             }
+            return false;
+        }
 
-            return null;
+        static void CreatePersonFromAPI()
+        {
+
         }
 
         static void Main(string[] args)
         {
+            var tempPerson = new Person { Name="Luke Skywalker" };
+            Console.WriteLine(IsValidPerson(tempPerson.Name).Result);
 
-            getapi();
+
+            Console.WriteLine(IsValidPerson("Fel namn").Result);
 
 
 
@@ -35,5 +45,9 @@ namespace SpacePark
 
     }
 
+    public class PersonSearch
+    {
+        public List<Person> results { get; set; }
+    }
 }
 

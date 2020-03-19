@@ -8,6 +8,6 @@ namespace SpacePark
     {
         int PersonID { get; set; }
         string Name { get; set; }
-        int SpaceShipID { get; set; }
+        SpaceShip SpaceShip { get; set; }
     }
 }
