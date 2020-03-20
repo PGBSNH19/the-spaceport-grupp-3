@@ -1,25 +1,15 @@
-﻿using RestSharp;
-using System.Threading.Tasks;
-using System;
+﻿using System;
 using System.Collections.Generic;
-
+using System.Text;
 
 namespace SpacePark
 {
-
     class Program
     {
-        
-
-         static void Main(string[] args)
+        static void Main(string[] args)
         {
             var spacePark = new SpacePark();
-            var temp = spacePark.IsValidPerson("Luke Skywalker");
-
-            Console.WriteLine(temp);
-            Console.ReadLine();
+            Console.WriteLine(spacePark.IsValidPerson("Luke Skywalker"));
         }
-
     }
 }
-
