@@ -9,49 +9,17 @@ namespace SpacePark
 
     class Program
     {
-        static async Task<bool> IsValidPerson(string name)
+        
+
+         static void Main(string[] args)
         {
-            var client = new RestClient("https://swapi.co/api/");
-            var request = new RestRequest($"people/?search={name}", DataFormat.Json);
-            var peopleResponse = client.Get<PersonSearch>(request);
+            var spacePark = new SpacePark();
+            var temp = spacePark.IsValidPerson("Luke Skywalker");
 
-
-            Console.WriteLine(peopleResponse.Data.starships.Count);
-
-
-            foreach (var p in peopleResponse.Data.results)
-            {
-                if (p.Name == name)
-                {
-                    return true;
-                }
-            }
-            return false;
+            Console.WriteLine(temp);
+            Console.ReadLine();
         }
 
-        public static void CreateStarshipFromAPI() 
-        {
-            //var client = new RestClient("https://swapi.co/api/");
-            //var request = new RestRequest($"people/?search=", DataFormat.Json);
-            //var peopleResponse = client.Get<PersonSearch>(request);
-        }
-
-        public static void CreatePersonFromAPI()  
-        {
-            
-        }
-
-        static void Main(string[] args)
-        {
-            IsValidPerson("Chewbacca");
-        }
-
-    }
-
-    public class PersonSearch
-    {
-        public List<string> starships { get; set; }
-        public List<Person> results { get; set; }
     }
 }
 
