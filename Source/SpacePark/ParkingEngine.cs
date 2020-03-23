@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SpacePark
 {
@@ -15,12 +16,14 @@ namespace SpacePark
             return apiResponse;
         }
 
-        public IRestResponse<SpaceShipResult> GetSpaceShipData(string input)
+        public async Task<SpaceShip> GetSpaceShipData(string input)
         {
             var client = new RestClient(input);
             var request = new RestRequest("", DataFormat.Json);
-            var apiResponse = client.Get<SpaceShipResult>(request);
-            return apiResponse;
+            var apiResponse = await client.ExecuteAsync<SpaceShip>(request);
+
+            apiResponse.Data.ShipLength = int.Parse(apiResponse.Data.Length);
+            return apiResponse.Data;
         }
 
         public bool IsValidPerson(string name)
@@ -61,15 +64,13 @@ namespace SpacePark
 
         public SpaceShip CreateStarshipFromAPI(string url)
         {
-
             var p = new SpaceShip();
-            var response = GetSpaceShipData(url);
+            var response = GetSpaceShipData(url).Result;
 
-            p.Name = response.Data.Results[0].Name;
-            p.Length = response.Data.Results[0].Length;
+            p.Name = response.Name;
+            p.ShipLength = response.ShipLength;
 
             return p;
         }
-
     }
 }

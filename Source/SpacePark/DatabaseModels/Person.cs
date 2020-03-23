@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SpacePark
 {
@@ -6,7 +7,9 @@ namespace SpacePark
     {
         public int PersonID { get; set; }
         public string Name { get; set; }
-        public List<string> Starships { get; set; }
-        public SpaceShip CurentShip { get; set; }
+
+        [NotMapped]
+        public List<SpaceShip> Starships { get; set; }
+        public SpaceShip CurrentShip { get; set; }
     }
 }
