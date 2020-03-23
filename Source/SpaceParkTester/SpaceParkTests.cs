@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Xunit.Sdk;
 
 namespace SpaceParkTester
 {
@@ -12,6 +11,7 @@ namespace SpaceParkTester
         {
             var spacePark = new SpacePark();
             Console.WriteLine(spacePark.IsValidPerson("Luke Skywalker"));
+
         }
     }
 }
