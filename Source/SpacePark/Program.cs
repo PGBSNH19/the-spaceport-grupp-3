@@ -4,9 +4,9 @@ using System.Text;
 
 namespace SpacePark
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var spacePark = new SpacePark();
             Console.WriteLine(spacePark.IsValidPerson("Luke Skywalker"));
