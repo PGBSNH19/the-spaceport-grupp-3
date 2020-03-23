@@ -26,7 +26,7 @@ namespace SpacePark
         public bool IsValidPerson(string name)
         {
             var response = GetPersonData(($"people/?search={name}"));
-            foreach (var p in response.Data.GetResults())
+            foreach (var p in response.Data.Results)
             {
                 if (p.Name == name)
                 {
@@ -47,7 +47,7 @@ namespace SpacePark
             if (IsValidPerson(name))
             {
                 var response = GetPersonData(($"people/?search={name}"));
-                foreach (var person in response.Data.GetResults())
+                foreach (var person in response.Data.Results)
                 {
                     if (person.Name == name)
                     {
@@ -61,23 +61,22 @@ namespace SpacePark
 
         public void CreateStarshipFromAPI(string url)
         {
-            //Name = response.Data.results.Select(x => x.Name).ToString(),
 
-            //var p = new SpaceShip();
-            //var response = GetSpaceShipData(url);
+            var p = new SpaceShip();
+            var response = GetSpaceShipData(url);
 
-            //foreach (var starship in response.Data.GetResults())
-            //{
-              
-            //    //if(starship == url)
-            //    //{
-            //    //    p.Name = response.Data.SpaceShipResults;
-            //    //    p.Length = starship.Length;
+            foreach (var starship in response.Data.GetResults())
+            {
 
-            //    //}
-                
+                if (starship == url)
+                {
+                    p.Name = response.Data.SpaceShipResults;
+                    p.Length = starship.Length;
 
-            //}
+                }
+
+
+            }
 
         }
 
