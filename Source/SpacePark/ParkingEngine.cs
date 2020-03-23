@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace SpacePark
 {
-    public class SpacePark
+    public class ParkingEngine
     {
         public IRestResponse<PersonResult> GetPersonData(string input)
         {

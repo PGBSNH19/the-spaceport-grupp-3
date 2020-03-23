@@ -1,15 +1,15 @@
-﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SpacePark;
 
-namespace SpaceParkTester
+namespace SpaceParkTester2
 {
     [TestClass]
     public class UnitTest1
     {
         [TestMethod]
-        public void IsValidPerson_ValidInput_True ()
+        public void IsValidPerson_ValidInput_True()
         {
-            var spacePark = new SpacePark();
+            var spacePark = new ParkingEngine();
 
             var IsValid = spacePark.IsValidPerson("Luke Skywalker");
 
@@ -20,12 +20,11 @@ namespace SpaceParkTester
         [TestMethod]
         public void IsValidPerson_InvalidInput_False()
         {
-            var spacePark = new SpacePark();
+            var spacePark = new ParkingEngine();
 
-            var IsValid = spacePark.IsValidPerson("Benjamin Ytterström");
+            var IsValid = spacePark.IsValidPerson("Benjamin Ytterstr�m");
 
             Assert.IsTrue(IsValid);
         }
     }
-}
 }

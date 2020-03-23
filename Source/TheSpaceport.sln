@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpacePark", "SpacePark\SpacePark.csproj", "{AB90162C-D65A-49F5-904E-57384FE8887A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceParkTester", "SpaceParkTester\SpaceParkTester.csproj", "{A544B3FC-96CA-45A7-BB00-F30BC58B388A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceParkTester2", "SpaceParkTester2\SpaceParkTester2.csproj", "{35E9A54E-6B3A-4BF4-807C-3A61791E5CAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{AB90162C-D65A-49F5-904E-57384FE8887A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB90162C-D65A-49F5-904E-57384FE8887A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB90162C-D65A-49F5-904E-57384FE8887A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A544B3FC-96CA-45A7-BB00-F30BC58B388A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A544B3FC-96CA-45A7-BB00-F30BC58B388A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A544B3FC-96CA-45A7-BB00-F30BC58B388A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A544B3FC-96CA-45A7-BB00-F30BC58B388A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35E9A54E-6B3A-4BF4-807C-3A61791E5CAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35E9A54E-6B3A-4BF4-807C-3A61791E5CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35E9A54E-6B3A-4BF4-807C-3A61791E5CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35E9A54E-6B3A-4BF4-807C-3A61791E5CAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,7 +8,7 @@ namespace SpacePark
     {
         public static void Main(string[] args)
         {
-            var spacepark = new SpacePark();
+            var spacepark = new ParkingEngine();
             
         }
     }
