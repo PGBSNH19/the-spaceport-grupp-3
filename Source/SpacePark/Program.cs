@@ -8,8 +8,8 @@ namespace SpacePark
     {
         public static void Main(string[] args)
         {
-            var spacePark = new SpacePark();
-            Console.WriteLine(spacePark.IsValidPerson("Luke Skywalker"));
+            var spacepark = new SpacePark();
+            
         }
     }
 }

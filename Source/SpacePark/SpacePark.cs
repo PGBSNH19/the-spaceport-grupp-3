@@ -17,8 +17,8 @@ namespace SpacePark
 
         public IRestResponse<SpaceShipResult> GetSpaceShipData(string input)
         {
-            var client = new RestClient("https://swapi.co/api/");
-            var request = new RestRequest(input, DataFormat.Json);
+            var client = new RestClient(input);
+            var request = new RestRequest("", DataFormat.Json);
             var apiResponse = client.Get<SpaceShipResult>(request);
             return apiResponse;
         }
@@ -59,25 +59,16 @@ namespace SpacePark
             }
         }
 
-        public void CreateStarshipFromAPI(string url)
+        public SpaceShip CreateStarshipFromAPI(string url)
         {
 
             var p = new SpaceShip();
             var response = GetSpaceShipData(url);
 
-            foreach (var starship in response.Data.GetResults())
-            {
+            p.Name = response.Data.Results[0].Name;
+            p.Length = response.Data.Results[0].Length;
 
-                if (starship == url)
-                {
-                    p.Name = response.Data.SpaceShipResults;
-                    p.Length = starship.Length;
-
-                }
-
-
-            }
-
+            return p;
         }
 
     }
