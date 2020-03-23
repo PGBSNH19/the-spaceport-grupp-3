@@ -10,7 +10,8 @@ namespace SpacePark.DatabaseModels
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-5NIA6HR\SQLEXPRESS;Initial Catalog=SpacePort;User ID=sa;Password=Knalleanka");
+            optionsBuilder.UseSqlServer("");
+);
         }
     }
 }
