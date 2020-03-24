@@ -9,7 +9,7 @@ namespace SpacePark
         public string Name { get; set; }
 
         [NotMapped]
-        public List<SpaceShip> Starships { get; set; }
+        public List<string> Starships { get; set; }
         public SpaceShip CurrentShip { get; set; }
     }
 }
