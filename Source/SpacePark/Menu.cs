@@ -90,20 +90,27 @@ namespace SpacePark
                             parkingCounter++;
                             var person = ParkingEngine.CreatePersonFromAPI(name);
                             Console.WriteLine("What ship do you want to park?");
+                            int count=0;
                             foreach (var item in person.Starships)
                             {
+                               
+                                count++;
                                 var s =  ParkingEngine.GetSpaceShipData(item);
-                                Console.WriteLine(s.Name); 
-
+                                Console.WriteLine($"{count}.{s.Name}");
                             }
-                            var ship=Console.ReadLine();
+                            var shipNumber=int.Parse(Console.ReadLine());
+
+                           var spaceShip= ParkingEngine.CreateStarshipFromAPI(person.Starships[shipNumber-1]);
+                           
+                            Console.WriteLine($"You have parked {spaceShip.Name}");
+                            Console.ReadKey();
                             
 
                             //ParkingEngine.CreateStarshipFromAPI(person.);
                         }
                         else
                         {
-                            Console.WriteLine("Sorry you have to member of Star Wars to park here");
+                            Console.WriteLine("Sorry you have to be a member of Star Wars to park here");
                             Thread.Sleep(2500);
                         }
                     }
