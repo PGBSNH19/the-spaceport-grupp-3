@@ -16,7 +16,7 @@ namespace SpacePark
             while (true)
             {
                 Menu.MenuHeader();
-                Menu.MenuSwitch(Menu.MenuOptions());
+                Menu.MenuSwitch(Menu.MenuOptions("Check in", "Check out", "Pay"));
                 Console.Clear();
             }
 
@@ -29,8 +29,8 @@ namespace SpacePark
             // var defaultConnectionString = config.GetConnectionString("DefaultConnection");
 
 
-            var spacepark = new ParkingEngine();
-            var starship = spacepark.IsValidPerson("Luke");
+            //var spacepark = new ParkingEngine();
+            //var starship = spacepark.IsValidPerson("Luke");
             //Console.WriteLine(starship.ShipLength);
             //Console.WriteLine(starship.Name);
         }
