@@ -11,7 +11,6 @@ namespace SpacePark.DatabaseModels
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("");
-);
         }
     }
 }
