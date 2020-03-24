@@ -8,7 +8,7 @@ namespace SpacePark
 {
     public class ParkingEngine
     {
-        public IRestResponse<PersonResult> GetPersonData(string input)
+        public static IRestResponse<PersonResult> GetPersonData(string input)
         {
             var client = new RestClient("https://swapi.co/api/");
             var request = new RestRequest(input, DataFormat.Json);
@@ -16,7 +16,7 @@ namespace SpacePark
             return apiResponse;
         }
 
-        public async Task<SpaceShip> GetSpaceShipData(string input)
+        public static async Task<SpaceShip> GetSpaceShipData(string input)
         {
             var client = new RestClient(input);
             var request = new RestRequest("", DataFormat.Json);
@@ -26,7 +26,7 @@ namespace SpacePark
             return apiResponse.Data;
         }
 
-        public bool IsValidPerson(string name)
+        public static bool IsValidPerson(string name)
         {
             var response = GetPersonData(($"people/?search={name}"));
             foreach (var p in response.Data.Results)
@@ -39,7 +39,7 @@ namespace SpacePark
             return false;
 
         }
-        public void CreatePersonFromAPI(string name)
+        public static Person CreatePersonFromAPI(string name)
         {
             //Name = response.Data.results.Select(x => x.Name).ToString(),
             //p.Starships = response.Data.results.Select(x => x.starships).Tolist();
@@ -58,11 +58,11 @@ namespace SpacePark
                         p.Starships = person.Starships;
                     }
                 }
-
+                return p;
             }
         }
 
-        public SpaceShip CreateStarshipFromAPI(string url)
+        public static SpaceShip CreateStarshipFromAPI(string url)
         {
             var p = new SpaceShip();
             var response = GetSpaceShipData(url).Result;

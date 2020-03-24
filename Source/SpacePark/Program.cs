@@ -13,6 +13,15 @@ namespace SpacePark
         public static void Main(string[] args)
         {
 
+            while (true)
+            {
+                Menu.MenuHeader();
+                Menu.MenuSwitch(Menu.MenuOptions());
+                Console.Clear();
+            }
+
+
+
 
             //var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("Configuration.json");
             //var config = builder.Build();
@@ -25,5 +34,7 @@ namespace SpacePark
             //Console.WriteLine(starship.ShipLength);
             //Console.WriteLine(starship.Name);
         }
+
+       
     }
 }
