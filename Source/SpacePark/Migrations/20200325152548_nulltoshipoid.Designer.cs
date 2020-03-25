@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpacePark.DatabaseModels;
 
 namespace SpacePark.Migrations
 {
     [DbContext(typeof(SpaceParkContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20200325152548_nulltoshipoid")]
+    partial class nulltoshipoid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,13 +51,14 @@ namespace SpacePark.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SpaceShipID")
+                    b.Property<int?>("SpaceShipID")
                         .HasColumnType("int");
 
                     b.HasKey("PersonID");
 
                     b.HasIndex("SpaceShipID")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SpaceShipID] IS NOT NULL");
 
                     b.ToTable("People");
                 });
@@ -89,9 +92,7 @@ namespace SpacePark.Migrations
                 {
                     b.HasOne("SpacePark.SpaceShip", "CurrentShip")
                         .WithOne("PersonID")
-                        .HasForeignKey("SpacePark.Person", "SpaceShipID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SpacePark.Person", "SpaceShipID");
                 });
 #pragma warning restore 612, 618
         }

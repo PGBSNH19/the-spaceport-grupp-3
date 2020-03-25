@@ -6,7 +6,7 @@ namespace SpacePark.DatabaseModels
 {
     public class SpaceParkContext : DbContext
     {
-        public DbSet<ParkingLot> ParkingLots { get; set; }
+        public DbSet<ParkingLot> ParkingLot { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<SpaceShip> SpaceShips { get; set; }
 
