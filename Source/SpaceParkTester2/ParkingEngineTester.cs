@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SpacePark;
+using SpacePark.DatabaseModels;
+using System.Linq;
 
 namespace SpaceParkTester2
 {
@@ -22,5 +24,34 @@ namespace SpaceParkTester2
 
             Assert.IsFalse(IsValid);
         }
+
+
+        [TestMethod]
+        public void ParkShip_ReadWriteToDBValidPerson_True()
+        {
+            var park = new ParkingEngine();
+
+            var person = new Person
+            {
+                Name = "TrädgårdsLasse",
+                CurrentShip = new SpaceShip
+                {
+                    Name = "DestroyerX2000",
+                    Length = "200"
+                }
+            };
+
+            park.ParkShip(person);
+
+            var context = new SpaceParkContext();
+            var query = context.SpaceShips.FirstOrDefault();
+
+
+            Assert.IsTrue(query.Name == "DestroyerX2000");
+            Assert.IsTrue(query.Length == "200");
+        }
+
+
+
     }
 }

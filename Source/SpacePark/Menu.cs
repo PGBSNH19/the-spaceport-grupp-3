@@ -118,12 +118,14 @@ namespace SpacePark
 
                         count++;
                         var s = ParkingEngine.GetSpaceShipData(item);
+
                         Console.WriteLine($"{count}.{s.Name}");
                     }
                     var shipNumber = int.Parse(Console.ReadLine());
 
                     var spaceShip = SpaceShip.CreateStarshipFromAPI(person.Starships[shipNumber - 1]);
 
+                    person.CurrentShip = spaceShip;
                     parkingCounter++;
 
                     Console.WriteLine($"You have parked {spaceShip.Name}");

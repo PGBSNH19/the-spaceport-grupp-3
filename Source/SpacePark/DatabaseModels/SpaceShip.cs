@@ -8,9 +8,6 @@ namespace SpacePark
 
         public string Name { get; set; }
 
-        public int ShipLength { get; set; }
-
-        [NotMapped]
         public string Length { get; set; }
 
 
@@ -20,9 +17,11 @@ namespace SpacePark
             var response =ParkingEngine.GetSpaceShipData(url);
 
             p.Name = response.Name;
-            p.ShipLength = response.ShipLength;
+            p.Length = response.Length;
 
             return p;
         }
+
+
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SpacePark.DatabaseModels;
 
 namespace SpacePark
 {
@@ -24,6 +25,18 @@ namespace SpacePark
             apiResponse.Wait();
             //apiResponse.Result.Data.ShipLength = int.Parse(apiResponse.Result.Data.Length);
             return apiResponse.Result.Data;
+        }
+
+        public async Task ParkShip(Person p)
+        {
+            using (var context = new SpaceParkContext())
+            {
+                context.SpaceShips.Add(p.CurrentShip);
+                context.People.Add(p);
+
+                context.SaveChanges();
+            }
+          
         }
 
         public static bool IsValidPerson(string name)
