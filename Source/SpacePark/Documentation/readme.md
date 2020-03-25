@@ -1,4 +1,4 @@
 # Documentation
 
-Use this file to fill in your documentation
+För att programmet ska se bra ut bör det köras i fullscreen som det är nu!
 
