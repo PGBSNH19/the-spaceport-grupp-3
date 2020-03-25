@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace SpacePark
 {
@@ -10,7 +11,6 @@ namespace SpacePark
         public static void MenuHeader()
         {
             Console.Title = "SpacePark";
-            Console.WindowWidth = 260;
             Console.ForegroundColor = ConsoleColor.Yellow;
             var header = new[]
             {
@@ -27,10 +27,10 @@ namespace SpacePark
             }
         }
 
-        public static string MenuOptions()
+        public static string MenuOptions(string optionone, string optiontwo ,string optionthree)
         {
             Console.WriteLine("Options");
-            string[] options = { "Check in", "Check out", "Pay" };
+            string[] options = { optionone, optiontwo, optionthree };
 
             int selected = 0;
 
@@ -71,7 +71,7 @@ namespace SpacePark
             return options[selected].ToLower();
         }
 
-        public static void MenuSwitch(string input)
+        public static  void MenuSwitch(string input)
         {
             int parkingSpaces = 10;
             int parkingCounter = 0;
@@ -89,12 +89,29 @@ namespace SpacePark
                         {
                             parkingCounter++;
                             var person = ParkingEngine.CreatePersonFromAPI(name);
-                            Console.WriteLine();
-                            ParkingEngine.CreateStarshipFromAPI(person.);
+                            Console.WriteLine("What ship do you want to park?");
+                            int count=0;
+                            foreach (var item in person.Starships)
+                            {
+                               
+                                count++;
+                                var s =  ParkingEngine.GetSpaceShipData(item);
+                                Console.WriteLine($"{count}.{s.Name}");
+                            }
+                            var shipNumber=int.Parse(Console.ReadLine());
+
+                           var spaceShip= ParkingEngine.CreateStarshipFromAPI(person.Starships[shipNumber-1]);
+                           
+                            Console.WriteLine($"You have parked {spaceShip.Name}");
+                            Console.ReadKey();
+                            
+
+                            //ParkingEngine.CreateStarshipFromAPI(person.);
                         }
                         else
                         {
-                            Console.WriteLine("Sorry you have to member of Star Wars to park here");
+                            Console.WriteLine("Sorry you have to be a member of Star Wars to park here");
+                            Thread.Sleep(2500);
                         }
                     }
                     else
@@ -113,6 +130,11 @@ namespace SpacePark
                 default:
                     break;
             }
+        }
+
+        public static void StarShipsSwitch(string input) 
+        {
+
         }
 
     }

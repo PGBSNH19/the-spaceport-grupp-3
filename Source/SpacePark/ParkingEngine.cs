@@ -16,14 +16,14 @@ namespace SpacePark
             return apiResponse;
         }
 
-        public static async Task<SpaceShip> GetSpaceShipData(string input)
+        public static SpaceShip GetSpaceShipData(string input)
         {
             var client = new RestClient(input);
             var request = new RestRequest("", DataFormat.Json);
-            var apiResponse = await client.ExecuteAsync<SpaceShip>(request);
-
-            apiResponse.Data.ShipLength = int.Parse(apiResponse.Data.Length);
-            return apiResponse.Data;
+            var apiResponse = client.ExecuteAsync<SpaceShip>(request);
+            apiResponse.Wait();
+            //apiResponse.Result.Data.ShipLength = int.Parse(apiResponse.Result.Data.Length);
+            return apiResponse.Result.Data;
         }
 
         public static bool IsValidPerson(string name)
@@ -60,12 +60,13 @@ namespace SpacePark
                 }
                 return p;
             }
+            return null;
         }
 
         public static SpaceShip CreateStarshipFromAPI(string url)
         {
             var p = new SpaceShip();
-            var response = GetSpaceShipData(url).Result;
+            var response = GetSpaceShipData(url);
 
             p.Name = response.Name;
             p.ShipLength = response.ShipLength;
