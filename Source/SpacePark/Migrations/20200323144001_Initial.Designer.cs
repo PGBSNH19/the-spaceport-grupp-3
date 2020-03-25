@@ -9,7 +9,7 @@ using SpacePark.DatabaseModels;
 
 namespace SpacePark.Migrations
 {
-    [DbContext(typeof(MyContext))]
+    [DbContext(typeof(SpaceParkContext))]
     [Migration("20200323144001_Initial")]
     partial class Initial
     {

@@ -26,12 +26,8 @@ namespace SpacePark
                 Console.WriteLine(line);
             }
         }
-        //This method make us be able to move around the menu whit the arrows. And returns the option we choose as a string.
-<<<<<<< HEAD
+   
         public static string MenuOptions(string optionOne, string optionTwo ,string optionThree)
-=======
-        public static string MenuOptions(string optionone, string optiontwo, string optionthree)
->>>>>>> 02203709096ff0a6046f702d3038bf8a7d1ff3e5
         {
             Console.WriteLine("Options");
             string[] options = { optionOne, optionTwo, optionThree };

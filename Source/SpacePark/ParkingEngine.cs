@@ -41,15 +41,6 @@ namespace SpacePark
         }
         
 
-        public static SpaceShip CreateStarshipFromAPI(string url)
-        {
-            var p = new SpaceShip();
-            var response = GetSpaceShipData(url);
-
-            p.Name = response.Name;
-            p.ShipLength = response.ShipLength;
-
-            return p;
-        }
+    
     }
 }

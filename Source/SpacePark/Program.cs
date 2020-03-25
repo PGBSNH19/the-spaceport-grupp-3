@@ -12,6 +12,7 @@ namespace SpacePark
     {
         public static void Main(string[] args)
         {
+            
 
             while (true)
             {
@@ -21,18 +22,6 @@ namespace SpacePark
             }
 
 
-
-
-            //var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("Configuration.json");
-            //var config = builder.Build();
-
-            // var defaultConnectionString = config.GetConnectionString("DefaultConnection");
-
-
-            //var spacepark = new ParkingEngine();
-            //var starship = spacepark.IsValidPerson("Luke");
-            //Console.WriteLine(starship.ShipLength);
-            //Console.WriteLine(starship.Name);
         }
 
        
