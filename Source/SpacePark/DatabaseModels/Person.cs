@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace SpacePark
 {
@@ -14,24 +15,16 @@ namespace SpacePark
 
         public static Person CreatePersonFromAPI(string name)
         {
-            //Name = response.Data.results.Select(x => x.Name).ToString(),
-            //p.Starships = response.Data.results.Select(x => x.starships).Tolist();
+            var response = ParkingEngine.GetPersonData(($"people/?search={name}"));
+            var foundPerson = response.Data.Results.FirstOrDefault(p => p.Name == name);
 
-            var p = new Person();
-
-
-            if (ParkingEngine.IsValidPerson(name))
+            if (foundPerson != null)
             {
-                var response = ParkingEngine.GetPersonData(($"people/?search={name}"));
-                foreach (var person in response.Data.Results)
+                return new Person()
                 {
-                    if (person.Name == name)
-                    {
-                        p.Name = person.Name;
-                        p.Starships = person.Starships;
-                    }
-                }
-                return p;
+                    Name = foundPerson.Name,
+                    Starships = foundPerson.Starships,
+                };
             }
             return null;
         }

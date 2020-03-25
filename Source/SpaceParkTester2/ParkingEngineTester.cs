@@ -4,14 +4,12 @@ using SpacePark;
 namespace SpaceParkTester2
 {
     [TestClass]
-    public class UnitTest1
+    public class ParkingEngineTester
     {
         [TestMethod]
         public void IsValidPerson_ValidInput_True()
         {
-            var spacePark = new ParkingEngine();
-
-            var IsValid = spacePark.IsValidPerson("Luke Skywalker");
+            var IsValid = ParkingEngine.IsValidPerson("Luke Skywalker");
 
             Assert.IsTrue(IsValid);
 
@@ -20,11 +18,9 @@ namespace SpaceParkTester2
         [TestMethod]
         public void IsValidPerson_InvalidInput_False()
         {
-            var spacePark = new ParkingEngine();
+            var IsValid = ParkingEngine.IsValidPerson("Benjamin Ytterström");
 
-            var IsValid = spacePark.IsValidPerson("Benjamin Ytterström");
-
-            Assert.IsTrue(IsValid);
+            Assert.IsFalse(IsValid);
         }
     }
 }

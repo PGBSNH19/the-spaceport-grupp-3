@@ -28,6 +28,8 @@ namespace SpacePark
 
         public static bool IsValidPerson(string name)
         {
+
+            // Behövs en nullcheck här  
             var response = GetPersonData(($"people/?search={name}"));
             foreach (var p in response.Data.Results)
             {
