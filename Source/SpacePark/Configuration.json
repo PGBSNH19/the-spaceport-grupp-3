@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=DESKTOP-I9R0GV9\\MSSQLSERVER01;Database=MyApplicationDatabase;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}

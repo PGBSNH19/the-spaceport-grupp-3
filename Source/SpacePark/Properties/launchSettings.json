@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SpacePark": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "settingsenviroment": "dev"
+      }
+    }
+  }
+}
