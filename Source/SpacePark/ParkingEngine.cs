@@ -39,29 +39,7 @@ namespace SpacePark
             return false;
 
         }
-        public static Person CreatePersonFromAPI(string name)
-        {
-            //Name = response.Data.results.Select(x => x.Name).ToString(),
-            //p.Starships = response.Data.results.Select(x => x.starships).Tolist();
-            
-            var p = new Person();
-
-
-            if (IsValidPerson(name))
-            {
-                var response = GetPersonData(($"people/?search={name}"));
-                foreach (var person in response.Data.Results)
-                {
-                    if (person.Name == name)
-                    {
-                        p.Name = person.Name;
-                        p.Starships = person.Starships;
-                    }
-                }
-                return p;
-            }
-            return null;
-        }
+        
 
         public static SpaceShip CreateStarshipFromAPI(string url)
         {

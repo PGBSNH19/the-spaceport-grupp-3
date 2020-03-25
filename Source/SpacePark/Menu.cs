@@ -27,7 +27,7 @@ namespace SpacePark
             }
         }
         //This method make us be able to move around the menu whit the arrows. And returns the option we choose as a string.
-        public static string MenuOptions(string optionone, string optiontwo ,string optionthree)
+        public static string MenuOptions(string optionone, string optiontwo, string optionthree)
         {
             Console.WriteLine("Options");
             string[] options = { optionone, optiontwo, optionthree };
@@ -71,53 +71,15 @@ namespace SpacePark
             return options[selected].ToLower();
         }
         // a switch case for parking / checking out
-        public static  void MenuSwitch(string input)
+        public static void MenuSwitch(string input)
         {
             //just to check if the parking lot is full
-            int parkingSpaces = 10;
-            int parkingCounter = 0;
+
 
             switch (input)
             {
                 case "check in":
-                    if (parkingCounter < parkingSpaces)
-                    {
-                        Console.WriteLine("");
-                        Console.WriteLine("Enter your name:");
-                        var name = Console.ReadLine();
-
-                        if (ParkingEngine.IsValidPerson(name))
-                        {
-                            var person = ParkingEngine.CreatePersonFromAPI(name);
-                            Console.WriteLine("What ship do you want to park?");
-                            int count=0;
-                            foreach (var item in person.Starships)
-                            {
-                               
-                                count++;
-                                var s =  ParkingEngine.GetSpaceShipData(item);
-                                Console.WriteLine($"{count}.{s.Name}");
-                            }
-                            var shipNumber=int.Parse(Console.ReadLine());
-
-                           var spaceShip= ParkingEngine.CreateStarshipFromAPI(person.Starships[shipNumber-1]);
-
-                           parkingCounter++;
-                           
-                            Console.WriteLine($"You have parked {spaceShip.Name}");
-                            Console.ReadKey();
-                        }
-                        else
-                        {
-                            Console.WriteLine("Sorry you have to be a member of Star Wars to park here");
-                            Thread.Sleep(2500);
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry the parking lot is full");
-                    }
-
+                    CheckIn();
                     break;
                 case "check out":
                     Console.WriteLine("Enter your name:");
@@ -132,10 +94,52 @@ namespace SpacePark
         }
 
 
-        public static void StarShipsSwitch(string input) 
+        public static void StarShipsSwitch(string input)
         {
 
         }
+        public static void CheckIn()
+        {
+            int parkingSpaces = 10;
+            int parkingCounter = 0;
+            if (parkingCounter < parkingSpaces)
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Enter your name:");
+                var name = Console.ReadLine();
 
+                if (ParkingEngine.IsValidPerson(name))
+                {
+                    var person = Person.CreatePersonFromAPI(name);
+                    Console.WriteLine("What ship do you want to park?");
+                    int count = 0;
+                    foreach (var item in person.Starships)
+                    {
+
+                        count++;
+                        var s = ParkingEngine.GetSpaceShipData(item);
+                        Console.WriteLine($"{count}.{s.Name}");
+                    }
+                    var shipNumber = int.Parse(Console.ReadLine());
+
+                    var spaceShip = SpaceShip.CreateStarshipFromAPI(person.Starships[shipNumber - 1]);
+
+                    parkingCounter++;
+
+                    Console.WriteLine($"You have parked {spaceShip.Name}");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("Sorry you have to be a member of Star Wars to park here");
+                    Thread.Sleep(2500);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Sorry the parking lot is full");
+            }
+
+        }
     }
 }
