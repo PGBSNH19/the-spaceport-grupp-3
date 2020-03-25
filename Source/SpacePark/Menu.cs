@@ -26,7 +26,7 @@ namespace SpacePark
                 Console.WriteLine(line);
             }
         }
-
+        //This method make us be able to move around the menu whit the arrows. And returns the option we choose as a string.
         public static string MenuOptions(string optionone, string optiontwo ,string optionthree)
         {
             Console.WriteLine("Options");
@@ -70,9 +70,10 @@ namespace SpacePark
             Console.CursorVisible = true;
             return options[selected].ToLower();
         }
-
+        // a switch case for parking / checking out
         public static  void MenuSwitch(string input)
         {
+            //just to check if the parking lot is full
             int parkingSpaces = 10;
             int parkingCounter = 0;
 
@@ -87,7 +88,6 @@ namespace SpacePark
 
                         if (ParkingEngine.IsValidPerson(name))
                         {
-                            parkingCounter++;
                             var person = ParkingEngine.CreatePersonFromAPI(name);
                             Console.WriteLine("What ship do you want to park?");
                             int count=0;
@@ -101,12 +101,11 @@ namespace SpacePark
                             var shipNumber=int.Parse(Console.ReadLine());
 
                            var spaceShip= ParkingEngine.CreateStarshipFromAPI(person.Starships[shipNumber-1]);
+
+                           parkingCounter++;
                            
                             Console.WriteLine($"You have parked {spaceShip.Name}");
                             Console.ReadKey();
-                            
-
-                            //ParkingEngine.CreateStarshipFromAPI(person.);
                         }
                         else
                         {
@@ -131,6 +130,7 @@ namespace SpacePark
                     break;
             }
         }
+
 
         public static void StarShipsSwitch(string input) 
         {
