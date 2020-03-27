@@ -20,13 +20,46 @@ namespace SpaceParkTester2
         [TestMethod]
         public void IsValidPerson_InvalidInput_False()
         {
-            var IsValid = ParkingEngine.IsValidPerson("Benjamin Ytterstr�m");
+            var IsValid = ParkingEngine.IsValidPerson("Benjamin Ytterstr�m");
 
             Assert.IsFalse(IsValid);
         }
 
 
-       
+        [TestMethod]
+        public void ParkShip_ReadWriteToDBValidPerson_True()
+        {
+            var park = new ParkingEngine();
+
+            var person = new Person
+            {
+                Name = "TrädgärdsLasse",
+                CurrentShip = new SpaceShip
+                {
+                    Name = "DestroyerX2000",
+                    Length = "200"
+                }
+            };
+
+            park.ParkShip(person);
+
+            var context = new SpaceParkContext();
+            var query = context.SpaceShips.FirstOrDefault();
+
+            Assert.IsTrue(query.Name == "DestroyerX2000");
+            Assert.IsTrue(query.Length == "200");
+           
+            context.SaveChanges();
+
+            var blablabl=context.SpaceShips.Where(x => x.Name == "DestroyerX2000").ToList();
+            foreach (var item in blablabl)
+            {
+                context.Remove(item);
+            }
+            
+            context.SaveChanges();
+
+        }
 
 
 
