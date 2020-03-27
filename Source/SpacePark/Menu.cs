@@ -7,7 +7,6 @@ namespace SpacePark
 {
     public class Menu
     {
-
         public static void MenuHeader()
         {
             Console.Title = "SpacePark";
@@ -75,13 +74,10 @@ namespace SpacePark
         // HUNGERIAN NOTATION?
         public static void MenuSwitch(string input)
         {
-            //just to check if the parking lot is full
-
-
             switch (input)
             {
                 case "check in":
-                    ParkingEngine.IsTherParkinSpacesAvailable();
+                    ParkingEngine.IsThereParkingSpaceAvailable();
                     break;
                 case "check out":
                     Console.WriteLine("Enter your name:");
@@ -93,55 +89,6 @@ namespace SpacePark
                 default:
                     break;
             }
-        }
-
-
-        public static void StarShipsSwitch(string input)
-        {
-
-        }
-        public static void CheckIn()
-        {
-
-            
-                Console.WriteLine("");
-                Console.WriteLine("Enter your name:");
-                var name = Console.ReadLine();
-
-                if (ParkingEngine.IsValidPerson(name))
-                {
-                    int count = 0;
-                    var person = Person.CreatePersonFromAPI(name);
-                    Console.WriteLine("Enter the number of the ship do you want to park:");
-
-                    foreach (var item in person.Starships)
-                    {
-                        count++;
-                        var s = ParkingEngine.GetSpaceShipData(item);
-
-                        Console.WriteLine($"{count}.{s.Name}");
-                    }
-
-                    var shipNumber = int.Parse(Console.ReadLine());
-                    var spaceShip = SpaceShip.CreateStarshipFromAPI(person.Starships[shipNumber - 1]);
-                    person.CurrentShip = spaceShip;
-                    
-
-                    ParkingEngine.ParkShip(person);
-                    Console.ReadKey();
-                }
-                else
-                {
-                    Console.WriteLine("Sorry you have to be a member of Star Wars to park here");
-                    Thread.Sleep(2500);
-                }
-
-            
-            
-            
-            
-           
-
         }
     }
 }

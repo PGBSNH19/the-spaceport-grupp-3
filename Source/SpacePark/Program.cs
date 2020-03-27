@@ -12,7 +12,13 @@ namespace SpacePark
     {
         public static void Main(string[] args)
         {
-            ParkingEngine.ClearParkedShips();
+
+            var p = ParkingEngine.GetPersonFromDatabase("Luke Skywalker").Result;
+            Console.WriteLine(ParkingEngine.HasPersonPaid(p));
+            ParkingEngine.PayParking(p);
+            Console.WriteLine(ParkingEngine.HasPersonPaid(p));
+
+            // Menu
             while (true)
             {
                 Menu.MenuHeader();

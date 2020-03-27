@@ -14,6 +14,7 @@ namespace SpacePark
         public int SpaceShipID { get; set; }
         //bara id som ska va ?
         public SpaceShip CurrentShip { get; set; }
+        public bool HasPaid { get; set; } = false;
 
         public static Person CreatePersonFromAPI(string name)
         {
