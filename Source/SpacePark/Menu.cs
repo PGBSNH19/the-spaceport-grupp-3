@@ -74,17 +74,20 @@ namespace SpacePark
         // HUNGERIAN NOTATION?
         public static void MenuSwitch(string input)
         {
+            string name;
+
             switch (input)
             {
                 case "check in":
                     ParkingEngine.IsThereParkingSpaceAvailable();
                     break;
                 case "check out":
-                    Console.WriteLine("Enter your name:");
-                    string checkOutName = Console.ReadLine();
+                    
                     break;
                 case "pay":
-                    Console.WriteLine("");
+                    Console.WriteLine("Enter the name of the person paying: ");
+                    name = Console.ReadLine();
+                    ParkingEngine.PayParking(ParkingEngine.GetPersonFromDatabase(name).Result);
                     break;
                 default:
                     break;

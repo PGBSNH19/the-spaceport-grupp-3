@@ -90,22 +90,6 @@ namespace SpacePark
             }
         }
 
-        public static async Task ClearParkedShips()
-        {
-            using (var context = new SpaceParkContext())
-            {
-                // Vi fick inte denna att fungera an någon anledning...
-                //context.Database.ExecuteSqlCommand($"TRUNCATE TABLE [dbo.{tableName}]");
-
-                foreach (var row in context.ParkingLot)
-                {
-                    row.Length = 50;
-                    row.SpaceShipID = null;
-                }
-                context.SaveChanges();
-            }
-        }
-
         public static async Task<ParkingLot> FindAvailableParkingSpace()
         {
             using (var context = new SpaceParkContext())
@@ -185,6 +169,29 @@ namespace SpacePark
             }
         }
 
+        public static async Task CheckOut(Person p)
+        {
+            if (p.HasPaid)
+            {
+                using (var context = new SpaceParkContext())
+                {
+                   
+                }
+            }
+        }
+        public static async Task ClearParkedShip(SpaceShip spaceShip)
+        {
+            using (var context = new SpaceParkContext())
+            {
+                context.ParkingLot.Where(x => x.SpaceShipID == spaceShip.SpaceShipID)
+                    .FirstOrDefault()
+                    .SpaceShip = null;
+                
+                context.SaveChanges();
+            }
+        }
+
+
         public static async Task IsThereParkingSpaceAvailable()
         {
             try
@@ -229,8 +236,15 @@ namespace SpacePark
                     .FirstOrDefault()
                     .HasPaid = true;
 
-                Console.WriteLine($"{p.CurrentShip}s pakrking has been paid.");
-                Console.WriteLine();
+                context.SaveChanges();
+
+                if (p.HasPaid)
+                {
+                    Console.WriteLine($"Parking has been paid & you are now ready to check out!");
+                    Thread.Sleep(2500);
+                    Console.WriteLine();
+                }
+
             }
         }
 

@@ -15,11 +15,6 @@ namespace SpacePark
         {
             CultureInfo.CurrentCulture = new CultureInfo("en-US",true);
 
-            var p = ParkingEngine.GetPersonFromDatabase("Luke Skywalker").Result;
-            Console.WriteLine(ParkingEngine.HasPersonPaid(p).Result);
-            ParkingEngine.PayParking(p);
-            Console.WriteLine(ParkingEngine.HasPersonPaid(p).Result);
-
             // Menu
             while (true)
             {
