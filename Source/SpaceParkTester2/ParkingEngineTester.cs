@@ -26,37 +26,7 @@ namespace SpaceParkTester2
         }
 
 
-        [TestMethod]
-        public void ParkShip_ReadWriteToDBValidPerson_True()
-        {
-            var person = new Person
-            {
-                Name = "TrädgårdsLasse",
-                CurrentShip = new SpaceShip
-                {
-                    Name = "DestroyerX2000",
-                    Length = "200"
-                }
-            };
-
-            ParkingEngine.ParkShip(person);
-
-            var context = new SpaceParkContext();
-            var query = context.SpaceShips.FirstOrDefault();
-
-            Assert.IsTrue(query.Name == "DestroyerX2000");
-            Assert.IsTrue(query.Length == "200");
-            context.SaveChanges();
-
-            // Removes the added ship and person from the database
-            var spaceShipsInDb = context.SpaceShips.Where(x => x.Name == "DestroyerX2000").ToList();
-            foreach (var item in spaceShipsInDb)
-            {
-                context.Remove(item);
-            }
-            
-            context.SaveChanges();
-        }
+       
 
 
 

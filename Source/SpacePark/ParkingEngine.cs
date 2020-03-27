@@ -45,17 +45,19 @@ namespace SpacePark
         
         public static async Task ParkShip(Person p)
         {
+          
             using (var context = new SpaceParkContext())
             {
                 context.SpaceShips.Add(p.CurrentShip);
                 context.People.Add(p);
-
                 context.SaveChanges();
             }
         }
 
+       
 
 
-    
+
+
     }
 }
