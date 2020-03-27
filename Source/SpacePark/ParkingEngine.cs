@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SpacePark.DatabaseModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace SpacePark
 {
@@ -50,6 +51,46 @@ namespace SpacePark
             {
                 context.SpaceShips.Add(p.CurrentShip);
                 context.People.Add(p);
+                context.SaveChanges();
+            }
+        }
+
+        public static async Task ClearParkedShips(string tableName)
+        {
+            using (var context = new SpaceParkContext())
+            {
+                // Vi fick inte denna att fungera an någon anledning...
+                //context.Database.ExecuteSqlCommand($"TRUNCATE TABLE [dbo.{tableName}]");
+
+                foreach (var row in context.ParkingLot)
+                {
+                    row.Length = 50;
+                    row.SpaceShipID = null;
+                }
+                context.SaveChanges();
+            }
+        }
+
+        public async Task FindAvailableParkingSpace()
+        {
+
+        }
+
+
+        public static async Task WriteParkingSpaceToDataBase()
+        {
+            using (var context = new SpaceParkContext()) 
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    var parkingSpace = new ParkingLot
+                    {
+                        Length = 50,
+                        SpaceShip = null
+                    };
+                    context.ParkingLot.Add(parkingSpace);
+                }
+
                 context.SaveChanges();
             }
         }

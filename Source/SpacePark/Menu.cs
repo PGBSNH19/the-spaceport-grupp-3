@@ -21,6 +21,7 @@ namespace SpacePark
             @"    \    /\    /    |  |____ |  `----.|  `----.|  `--'  | |  |  |  | |  |____        |  |     |  `--'  |    .----)   |   |  |     /  _____  \ |  `----.|  |____ |  |     /  _____  \  |  |\  \----.|  .  \",
             @"     \__/  \__/     |_______||_______| \______| \______/  |__|  |__| |_______|       |__|      \______/     |_______/    | _|    /__/     \__\ \______||_______|| _|    /__/     \__\ | _| `._____||__|\__\"
             };
+
             foreach (var line in header)
             {
                 Console.WriteLine(line);
@@ -70,6 +71,7 @@ namespace SpacePark
             Console.CursorVisible = true;
             return options[selected].ToLower();
         }
+
         // HUNGERIAN NOTATION?
         public static void MenuSwitch(string input)
         {
@@ -128,7 +130,7 @@ namespace SpacePark
                     person.CurrentShip = spaceShip;
                     parkingCounter++;
 
-                    
+                    ParkingEngine.ParkShip(person);
                     Console.ReadKey();
                 }
                 else

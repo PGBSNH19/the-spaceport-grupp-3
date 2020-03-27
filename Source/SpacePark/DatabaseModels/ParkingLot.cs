@@ -8,6 +8,7 @@ namespace SpacePark
     {
         public int ParkingLotID { get; set; }
         public int Length { get; set; }
+        public int? SpaceShipID { get; set; }
         public SpaceShip? SpaceShip { get; set; }
     }
 }
