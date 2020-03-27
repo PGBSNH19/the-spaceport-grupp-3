@@ -70,7 +70,7 @@ namespace SpacePark
             Console.CursorVisible = true;
             return options[selected].ToLower();
         }
-        // a switch case for parking / checking out
+        // HUNGERIAN NOTATION?
         public static void MenuSwitch(string input)
         {
             //just to check if the parking lot is full
