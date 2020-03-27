@@ -13,15 +13,12 @@ namespace SpacePark
         public static void Main(string[] args)
         {
 
-            ParkingEngine.WriteParkingSpaceToDataBase();
             while (true)
             {
                 Menu.MenuHeader();
                 Menu.MenuSwitch(Menu.MenuOptions("Check in", "Check out", "Pay"));
                 Console.Clear();
             }
-
-
         }
 
        

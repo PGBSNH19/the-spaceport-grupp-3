@@ -86,12 +86,12 @@ namespace SpacePark
         {
             using (var context = new SpaceParkContext())
             {
-                var checkSpaceID = context.ParkingLot.FirstOrDefault(x => x.SpaceShipID == null);
-                if (checkSpaceID == null)
+                var parkingSpace = context.ParkingLot.FirstOrDefault(x => x.SpaceShipID == null);
+                if (parkingSpace == null)
                 {
                     throw new NullReferenceException();
                 }
-                return checkSpaceID;
+                return parkingSpace;
             }
         }
 
