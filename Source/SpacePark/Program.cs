@@ -12,7 +12,7 @@ namespace SpacePark
     {
         public static void Main(string[] args)
         {
-
+            ParkingEngine.ClearParkedShips();
             while (true)
             {
                 Menu.MenuHeader();

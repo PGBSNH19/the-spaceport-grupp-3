@@ -81,7 +81,7 @@ namespace SpacePark
             switch (input)
             {
                 case "check in":
-                    CheckIn();
+                    ParkingEngine.IsTherParkinSpacesAvailable();
                     break;
                 case "check out":
                     Console.WriteLine("Enter your name:");
@@ -102,11 +102,8 @@ namespace SpacePark
         }
         public static void CheckIn()
         {
-            int parkingSpaces = 10;
-            int parkingCounter = 0;
 
-            if (parkingCounter < parkingSpaces)
-            {
+            
                 Console.WriteLine("");
                 Console.WriteLine("Enter your name:");
                 var name = Console.ReadLine();
@@ -128,7 +125,7 @@ namespace SpacePark
                     var shipNumber = int.Parse(Console.ReadLine());
                     var spaceShip = SpaceShip.CreateStarshipFromAPI(person.Starships[shipNumber - 1]);
                     person.CurrentShip = spaceShip;
-                    parkingCounter++;
+                    
 
                     ParkingEngine.ParkShip(person);
                     Console.ReadKey();
@@ -138,11 +135,12 @@ namespace SpacePark
                     Console.WriteLine("Sorry you have to be a member of Star Wars to park here");
                     Thread.Sleep(2500);
                 }
-            }
-            else
-            {
-                Console.WriteLine("Sorry the parking lot is full");
-            }
+
+            
+            
+            
+            
+           
 
         }
     }

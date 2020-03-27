@@ -44,15 +44,31 @@ namespace SpacePark
             return false;
 
         }
-        
+
         public static async Task ParkShip(Person p)
         {
+            ParkingLot currentSpace;
+
             using (var context = new SpaceParkContext())
             {
                 try
                 {
-                    var currentSpace = FindAvailableParkingSpace();
-                    currentSpace.Result.SpaceShipID = p.CurrentShip.SpaceShipID;
+                    currentSpace = FindAvailableParkingSpace().Result;
+
+                    if (int.Parse(p.CurrentShip.Length) <= currentSpace.Length)
+                    {
+                        context
+                       .ParkingLot
+                       .Where(x => x.ParkingLotID == currentSpace.ParkingLotID)
+                       .FirstOrDefault()
+                       .SpaceShip = p.CurrentShip;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry your ship is to big");
+                    }
+
+
                 }
                 catch (Exception)
                 {
@@ -66,7 +82,7 @@ namespace SpacePark
             }
         }
 
-        public static async Task ClearParkedShips(string tableName)
+        public static async Task ClearParkedShips()
         {
             using (var context = new SpaceParkContext())
             {
@@ -97,7 +113,7 @@ namespace SpacePark
 
         public static async Task WriteParkingSpaceToDataBase()
         {
-            using (var context = new SpaceParkContext()) 
+            using (var context = new SpaceParkContext())
             {
                 for (int i = 0; i < 10; i++)
                 {
@@ -113,7 +129,21 @@ namespace SpacePark
             }
         }
 
-       
+        public static async Task IsTherParkinSpacesAvailable()
+        {
+            try
+            {
+                FindAvailableParkingSpace();
+                Menu.CheckIn();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Ther are no spaces available ");
+
+            }
+        }
+
+
 
 
 
