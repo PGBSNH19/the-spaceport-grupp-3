@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SpacePark.DatabaseModels;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
 
 namespace SpacePark
 {
@@ -46,9 +47,19 @@ namespace SpacePark
         
         public static async Task ParkShip(Person p)
         {
-          
             using (var context = new SpaceParkContext())
             {
+                try
+                {
+                    var currentSpace = FindAvailableParkingSpace();
+                    currentSpace.Result.SpaceShipID = p.CurrentShip.SpaceShipID;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("No avaialable parking spaces");
+                    Thread.Sleep(2500);
+                }
+
                 context.SpaceShips.Add(p.CurrentShip);
                 context.People.Add(p);
                 context.SaveChanges();
@@ -71,11 +82,18 @@ namespace SpacePark
             }
         }
 
-        public async Task FindAvailableParkingSpace()
+        public static async Task<ParkingLot> FindAvailableParkingSpace()
         {
-
+            using (var context = new SpaceParkContext())
+            {
+                var checkSpaceID = context.ParkingLot.FirstOrDefault(x => x.SpaceShipID == null);
+                if (checkSpaceID == null)
+                {
+                    throw new NullReferenceException();
+                }
+                return checkSpaceID;
+            }
         }
-
 
         public static async Task WriteParkingSpaceToDataBase()
         {

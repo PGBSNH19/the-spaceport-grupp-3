@@ -13,7 +13,7 @@ namespace SpacePark
         public static void Main(string[] args)
         {
 
-
+            ParkingEngine.WriteParkingSpaceToDataBase();
             while (true)
             {
                 Menu.MenuHeader();
