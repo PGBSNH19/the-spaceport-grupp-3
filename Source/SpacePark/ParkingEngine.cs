@@ -64,8 +64,8 @@ namespace SpacePark
                 try
                 {
                     currentSpace = FindAvailableParkingSpace().Result;
-
-                    if (int.Parse(p.CurrentShip.Length) <= currentSpace.Length)
+                   
+                    if (double.Parse(p.CurrentShip.Length) <= currentSpace.Length)
                     {
                         context
                        .ParkingLot
@@ -189,7 +189,7 @@ namespace SpacePark
         {
             try
             {
-                FindAvailableParkingSpace();
+                var freespace=FindAvailableParkingSpace().Result;
                 CheckIn();
             }
             catch (Exception)
