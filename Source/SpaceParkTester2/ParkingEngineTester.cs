@@ -5,63 +5,63 @@ using System.Linq;
 
 namespace SpaceParkTester2
 {
-    [TestClass]
-    public class ParkingEngineTester
-    {
-        [TestMethod]
-        public void IsValidPerson_ValidInput_True()
-        {
-            var IsValid = ParkingEngine.IsValidPerson("Luke Skywalker");
+    //[TestClass]
+    //public class ParkingEngineTester
+    //{
+    //    [TestMethod]
+    //    public void IsValidPerson_ValidInput_True()
+    //    {
+    //        var IsValid = ParkingEngine.IsValidPerson("Luke Skywalker");
 
-            Assert.IsTrue(IsValid);
+    //        Assert.IsTrue(IsValid);
 
-        }
+    //    }
 
-        [TestMethod]
-        public void IsValidPerson_InvalidInput_False()
-        {
-            var IsValid = ParkingEngine.IsValidPerson("Benjamin Ytterstr�m");
+    //    [TestMethod]
+    //    public void IsValidPerson_InvalidInput_False()
+    //    {
+    //        var IsValid = ParkingEngine.IsValidPerson("Benjamin Ytterstr�m");
 
-            Assert.IsFalse(IsValid);
-        }
+    //        Assert.IsFalse(IsValid);
+    //    }
 
 
-        [TestMethod]
-        public void ParkShip_ReadWriteToDBValidPerson_True()
-        {
-            var park = new ParkingEngine();
+    //    [TestMethod]
+    //    public void ParkShip_ReadWriteToDBValidPerson_True()
+    //    {
+    //        var park = new ParkingEngine();
 
-            var person = new Person
-            {
-                Name = "TrädgärdsLasse",
-                CurrentShip = new SpaceShip
-                {
-                    Name = "DestroyerX2000",
-                    Length = "200"
-                }
-            };
+    //        var person = new Person
+    //        {
+    //            Name = "TrädgärdsLasse",
+    //            CurrentShip = new SpaceShip
+    //            {
+    //                Name = "DestroyerX2000",
+    //                Length = "200"
+    //            }
+    //        };
 
-            park.ParkShip(person);
+    //        park.ParkShip(person);
 
-            var context = new SpaceParkContext();
-            var query = context.SpaceShips.FirstOrDefault();
+    //        var context = new SpaceParkContext();
+    //        var query = context.SpaceShips.FirstOrDefault();
 
-            Assert.IsTrue(query.Name == "DestroyerX2000");
-            Assert.IsTrue(query.Length == "200");
+    //        Assert.IsTrue(query.Name == "DestroyerX2000");
+    //        Assert.IsTrue(query.Length == "200");
            
-            context.SaveChanges();
+    //        context.SaveChanges();
 
-            var blablabl=context.SpaceShips.Where(x => x.Name == "DestroyerX2000").ToList();
-            foreach (var item in blablabl)
-            {
-                context.Remove(item);
-            }
+    //        var blablabl=context.SpaceShips.Where(x => x.Name == "DestroyerX2000").ToList();
+    //        foreach (var item in blablabl)
+    //        {
+    //            context.Remove(item);
+    //        }
             
-            context.SaveChanges();
+    //        context.SaveChanges();
 
-        }
+    //    }
 
 
 
-    }
+    //}
 }
