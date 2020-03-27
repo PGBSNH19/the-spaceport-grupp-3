@@ -102,6 +102,7 @@ namespace SpacePark
         {
             int parkingSpaces = 10;
             int parkingCounter = 0;
+
             if (parkingCounter < parkingSpaces)
             {
                 Console.WriteLine("");
@@ -110,25 +111,24 @@ namespace SpacePark
 
                 if (ParkingEngine.IsValidPerson(name))
                 {
-                    var person = Person.CreatePersonFromAPI(name);
-                    Console.WriteLine("What ship do you want to park?");
                     int count = 0;
+                    var person = Person.CreatePersonFromAPI(name);
+                    Console.WriteLine("Enter the number of the ship do you want to park:");
+
                     foreach (var item in person.Starships)
                     {
-
                         count++;
                         var s = ParkingEngine.GetSpaceShipData(item);
 
                         Console.WriteLine($"{count}.{s.Name}");
                     }
+
                     var shipNumber = int.Parse(Console.ReadLine());
-
                     var spaceShip = SpaceShip.CreateStarshipFromAPI(person.Starships[shipNumber - 1]);
-
                     person.CurrentShip = spaceShip;
                     parkingCounter++;
 
-                    Console.WriteLine($"You have parked {spaceShip.Name}");
+                    
                     Console.ReadKey();
                 }
                 else
