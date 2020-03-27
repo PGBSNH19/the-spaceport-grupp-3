@@ -20,7 +20,7 @@ namespace SpaceParkTester2
         [TestMethod]
         public void IsValidPerson_InvalidInput_False()
         {
-            var IsValid = ParkingEngine.IsValidPerson("Benjamin Ytterström");
+            var IsValid = ParkingEngine.IsValidPerson("Benjamin Ytterstrï¿½m");
 
             Assert.IsFalse(IsValid);
         }
@@ -33,7 +33,7 @@ namespace SpaceParkTester2
 
             var person = new Person
             {
-                Name = "TrädgårdsLasse",
+                Name = "TrÃ¤dgÃ¤rdsLasse",
                 CurrentShip = new SpaceShip
                 {
                     Name = "DestroyerX2000",
@@ -41,7 +41,7 @@ namespace SpaceParkTester2
                 }
             };
 
-            park.ParkShip(person);
+            //park.ParkShip(person);
 
             var context = new SpaceParkContext();
             var query = context.SpaceShips.FirstOrDefault();
