@@ -41,7 +41,7 @@ namespace SpaceParkTester2
                 }
             };
 
-            //park.ParkShip(person);
+            park.ParkShip(person);
 
             var context = new SpaceParkContext();
             var query = context.SpaceShips.FirstOrDefault();
