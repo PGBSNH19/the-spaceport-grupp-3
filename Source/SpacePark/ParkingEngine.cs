@@ -27,18 +27,6 @@ namespace SpacePark
             return apiResponse.Result.Data;
         }
 
-        public async Task ParkShip(Person p)
-        {
-            using (var context = new SpaceParkContext())
-            {
-                context.SpaceShips.Add(p.CurrentShip);
-                context.People.Add(p);
-
-                context.SaveChanges();
-            }
-          
-        }
-
         public static bool IsValidPerson(string name)
         {
 
@@ -55,7 +43,21 @@ namespace SpacePark
 
         }
         
+        public static async Task ParkShip(Person p)
+        {
+          
+            using (var context = new SpaceParkContext())
+            {
+                context.SpaceShips.Add(p.CurrentShip);
+                context.People.Add(p);
+                context.SaveChanges();
+            }
+        }
 
-    
+       
+
+
+
+
     }
 }
