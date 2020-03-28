@@ -175,10 +175,29 @@ namespace SpacePark
             {
                 using (var context = new SpaceParkContext())
                 {
-                   
+                    context.ParkingLot.Where(x => x.SpaceShipID == p.SpaceShipID).FirstOrDefault().SpaceShipID = null;
+                    await NullSpaceShipIDInPeopleTable(p, context);
+                    context.Remove(context.People.Where(x => x.Name == p.Name).FirstOrDefault());
+                    var temp = context.SpaceShips.Where(x => x.SpaceShipID == p.SpaceShipID).FirstOrDefault();
+                    context.Remove(temp);
+                     context.SaveChanges();
                 }
+                Console.WriteLine("you have ben checed out");
+                Thread.Sleep(2500);
+            }
+            else
+            {
+                Console.WriteLine("sorry you have to pay first");
+                Thread.Sleep(2500);
             }
         }
+
+        private static async Task NullSpaceShipIDInPeopleTable(Person p, SpaceParkContext context)
+        {
+            context.People.Where(x => x.Name == p.Name).FirstOrDefault().SpaceShipID = null;
+            context.SaveChanges();
+        }
+
         public static async Task ClearParkedShip(SpaceShip spaceShip)
         {
             using (var context = new SpaceParkContext())
@@ -238,14 +257,14 @@ namespace SpacePark
 
                 context.SaveChanges();
 
+
+            }
                 if (p.HasPaid)
                 {
                     Console.WriteLine($"Parking has been paid & you are now ready to check out!");
                     Thread.Sleep(2500);
                     Console.WriteLine();
                 }
-
-            }
         }
 
         public static async Task<Person> GetPersonFromDatabase(string name)

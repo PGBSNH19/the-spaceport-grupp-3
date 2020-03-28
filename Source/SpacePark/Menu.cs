@@ -82,7 +82,9 @@ namespace SpacePark
                     ParkingEngine.IsThereParkingSpaceAvailable();
                     break;
                 case "check out":
-                    
+                    Console.WriteLine("Enter the name of the person checking out: ");
+                    name = Console.ReadLine();
+                    ParkingEngine.CheckOut(ParkingEngine.GetPersonFromDatabase(name).Result);
                     break;
                 case "pay":
                     Console.WriteLine("Enter the name of the person paying: ");
