@@ -26,8 +26,8 @@ namespace SpacePark
                 Console.WriteLine(line);
             }
         }
-   
-        public static string MenuOptions(string optionOne, string optionTwo ,string optionThree)
+
+        public static string MenuOptions(string optionOne, string optionTwo, string optionThree)
         {
             Console.WriteLine("Options");
             string[] options = { optionOne, optionTwo, optionThree };
@@ -84,12 +84,33 @@ namespace SpacePark
                 case "check out":
                     Console.WriteLine("Enter the name of the person checking out: ");
                     name = Console.ReadLine();
-                    ParkingEngine.CheckOut(ParkingEngine.GetPersonFromDatabase(name).Result);
+
+                    //If the person is in the database and run check out that person
+                    if (ParkingEngine.IsPersonInDatabase(name).Result)
+                    {
+                        ParkingEngine.CheckOut(ParkingEngine.GetPersonFromDatabase(name).Result);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Cant find person in database");
+                        Thread.Sleep(2500);
+                    }
                     break;
                 case "pay":
                     Console.WriteLine("Enter the name of the person paying: ");
                     name = Console.ReadLine();
-                    ParkingEngine.PayParking(ParkingEngine.GetPersonFromDatabase(name).Result);
+
+                    //If the person is in the database run payparking whit that person objekt
+                    if (ParkingEngine.IsPersonInDatabase(name).Result)
+                    {
+                        ParkingEngine.PayParking(ParkingEngine.GetPersonFromDatabase(name).Result);
+                    }
+                    
+                    else
+                    {
+                        Console.WriteLine("Cant find person in database");
+                        Thread.Sleep(2500);
+                    }
                     break;
                 default:
                     break;

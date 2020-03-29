@@ -70,7 +70,7 @@ namespace SpacePark
                 try
                 {
                     currentSpace = FindAvailableParkingSpace().Result;
-                   
+
                     // If the ship is smaller than the parkingspace park in the space => park it.
                     if (double.Parse(p.CurrentShip.Length) <= currentSpace.Length)
                     {
@@ -112,10 +112,10 @@ namespace SpacePark
 
         public static async Task WriteParkingSpaceToDataBase()
         {
-            // Adds 10 rows to the parkinglot table.
             using (var context = new SpaceParkContext())
             {
-                for (int i = 0; i < 10; i++)
+                //Adds so the total parkingspaces are max 10 spaces
+                for (int i = context.ParkingLot.Count(); i < 10; i++)
                 {
                     var parkingSpace = new ParkingLot
                     {
@@ -194,14 +194,12 @@ namespace SpacePark
                     context.Remove(context.People
                         .Where(x => x.Name == p.Name)
                         .FirstOrDefault());
-                    
-                    // Borde inte denna och den ovan se exakt lika ut?
-                    var temp = context.SpaceShips.Where(x => x.SpaceShipID == p.SpaceShipID)
-                        .FirstOrDefault();
-                    
-                    context.Remove(temp);
 
-                     context.SaveChanges();
+                    context.Remove(context.SpaceShips
+                        .Where(x => x.SpaceShipID == p.SpaceShipID)
+                        .FirstOrDefault());
+
+                    context.SaveChanges();
                 }
                 Console.WriteLine("you have ben checed out");
                 Thread.Sleep(2500);
@@ -230,7 +228,7 @@ namespace SpacePark
                 context.ParkingLot.Where(x => x.SpaceShipID == spaceShip.SpaceShipID)
                     .FirstOrDefault()
                     .SpaceShip = null;
-                
+
                 context.SaveChanges();
             }
         }
@@ -240,8 +238,7 @@ namespace SpacePark
         {
             try
             {
-                // när används freespace?
-                var freespace = FindAvailableParkingSpace().Result;
+                FindAvailableParkingSpace();
                 CheckIn();
             }
             catch (Exception)
@@ -260,7 +257,7 @@ namespace SpacePark
                     .People
                     .Where(x => x.Name == p.Name)
                     .FirstOrDefault().HasPaid;
-                
+
                 if (hasPaid)
                 {
                     return true;
@@ -272,6 +269,7 @@ namespace SpacePark
 
         public static async Task PayParking(Person p)
         {
+            
             using (var context = new SpaceParkContext())
             {
                 Console.WriteLine();

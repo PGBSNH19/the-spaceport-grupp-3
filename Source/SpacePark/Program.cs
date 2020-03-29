@@ -13,8 +13,10 @@ namespace SpacePark
     {
         public static void Main(string[] args)
         {
-            CultureInfo.CurrentCulture = new CultureInfo("en-US",true);
 
+            CultureInfo.CurrentCulture = new CultureInfo("en-US", true);
+            //Make sure there are parkingspaces in the database
+            ParkingEngine.WriteParkingSpaceToDataBase();
             // Menu
             while (true)
             {
@@ -24,6 +26,6 @@ namespace SpacePark
             }
         }
 
-       
+
     }
 }
