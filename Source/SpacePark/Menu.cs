@@ -82,13 +82,18 @@ namespace SpacePark
         public static void MenuSwitch(string input)
         {
             string name;
-
             switch (input)
             {
                 case "check in":
-                    ParkingEngine.IsThereParkingSpaceAvailable();
+                    // If there are parking available, check in
+                    if (ParkingEngine.FindAvailableParkingSpace().Result != null)
+                    {
+                        Console.WriteLine();
+                        ParkingEngine.CheckIn();
+                    }
                     break;
                 case "check out":
+                    Console.WriteLine();
                     Console.WriteLine("Enter the name of the person checking out: ");
                     name = Console.ReadLine();
 
@@ -99,6 +104,7 @@ namespace SpacePark
                     }
                     else
                     {
+                        Console.WriteLine();
                         Console.WriteLine("Cant find person in database");
                         Thread.Sleep(2500);
                     }
@@ -115,6 +121,7 @@ namespace SpacePark
                     
                     else
                     {
+                        Console.WriteLine();
                         Console.WriteLine("Cant find person in database");
                         Thread.Sleep(2500);
                     }

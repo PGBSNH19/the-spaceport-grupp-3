@@ -17,11 +17,14 @@ namespace SpacePark
             CultureInfo.CurrentCulture = new CultureInfo("en-US", true);
             //Make sure there are parkingspaces in the database
             ParkingEngine.WriteParkingSpaceToDataBase();
+            
             // Menu
+            Console.ReadLine();
             while (true)
             {
                 Menu.MenuHeader();
-                Menu.MenuSwitch(Menu.MenuOptions("Check in", "Check out", "Pay"));
+                Console.WriteLine();
+                Menu.MenuSwitch(Menu.MenuOptions("Check in", "Pay", "Check out"));
                 Console.Clear();
             }
         }
