@@ -16,6 +16,7 @@ namespace SpacePark
             var client = new RestClient("https://swapi.co/api/");
             var request = new RestRequest(input, DataFormat.Json);
             var apiResponse = client.Get<PersonResult>(request);
+
             return apiResponse;
         }
 
@@ -25,24 +26,28 @@ namespace SpacePark
             var request = new RestRequest("", DataFormat.Json);
             var apiResponse = client.ExecuteAsync<SpaceShip>(request);
             apiResponse.Wait();
-            //apiResponse.Result.Data.ShipLength = int.Parse(apiResponse.Result.Data.Length);
+
             return apiResponse.Result.Data;
         }
 
         public static bool IsValidPerson(string name)
         {
-
-            // Behövs en nullcheck här  
             var response = GetPersonData(($"people/?search={name}"));
-            foreach (var p in response.Data.Results)
+
+            // Returns false if the person is not in the SWAPI database.
+            if (response != null)
             {
-                if (p.Name == name)
+                foreach (var p in response.Data.Results)
                 {
-                    return true;
+                    if (p.Name == name)
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
         }
+
         public async static Task<bool> IsPersonInDatabase(string name)
         {
             using (var context = new SpaceParkContext())
@@ -65,11 +70,10 @@ namespace SpacePark
                 {
                     currentSpace = FindAvailableParkingSpace().Result;
                    
+                    // If the ship is smaller than the parkingspace park in the space.
                     if (double.Parse(p.CurrentShip.Length) <= currentSpace.Length)
                     {
-                        context
-                       .ParkingLot
-                       .Where(x => x.ParkingLotID == currentSpace.ParkingLotID)
+                        context.ParkingLot.Where(x => x.ParkingLotID == currentSpace.ParkingLotID)
                        .FirstOrDefault()
                        .SpaceShip = p.CurrentShip;
                     }
@@ -84,6 +88,7 @@ namespace SpacePark
                     Thread.Sleep(2500);
                 }
 
+                // Adds the person and the ship to the appropriate table then saves the changes.
                 context.SpaceShips.Add(p.CurrentShip);
                 context.People.Add(p);
                 context.SaveChanges();
@@ -94,6 +99,7 @@ namespace SpacePark
         {
             using (var context = new SpaceParkContext())
             {
+                // Finds the first available (where SpaceShipID == null) parkingspot, and then returns that spot.
                 var parkingSpace = context.ParkingLot.FirstOrDefault(x => x.SpaceShipID == null);
                 if (parkingSpace == null)
                 {
@@ -116,7 +122,6 @@ namespace SpacePark
                     };
                     context.ParkingLot.Add(parkingSpace);
                 }
-
                 context.SaveChanges();
             }
         }
@@ -175,11 +180,25 @@ namespace SpacePark
             {
                 using (var context = new SpaceParkContext())
                 {
-                    context.ParkingLot.Where(x => x.SpaceShipID == p.SpaceShipID).FirstOrDefault().SpaceShipID = null;
+                    // Sets the parkingspaces' shipID back to null.
+                    context.ParkingLot.Where(x => x.SpaceShipID == p.SpaceShipID)
+                        .FirstOrDefault()
+                        .SpaceShipID = null;
+
+                    // Nulls a persons current shipID
                     await NullSpaceShipIDInPeopleTable(p, context);
-                    context.Remove(context.People.Where(x => x.Name == p.Name).FirstOrDefault());
-                    var temp = context.SpaceShips.Where(x => x.SpaceShipID == p.SpaceShipID).FirstOrDefault();
+
+                    //Removes the curernt person from the person table
+                    context.Remove(context.People
+                        .Where(x => x.Name == p.Name)
+                        .FirstOrDefault());
+                    
+                    // Borde inte denna och den ovan se exakt lika ut?
+                    var temp = context.SpaceShips.Where(x => x.SpaceShipID == p.SpaceShipID)
+                        .FirstOrDefault();
+                    
                     context.Remove(temp);
+
                      context.SaveChanges();
                 }
                 Console.WriteLine("you have ben checed out");
@@ -194,7 +213,10 @@ namespace SpacePark
 
         private static async Task NullSpaceShipIDInPeopleTable(Person p, SpaceParkContext context)
         {
-            context.People.Where(x => x.Name == p.Name).FirstOrDefault().SpaceShipID = null;
+            // Find the person in the people table and sets the spaceshipID to null.
+            context.People.Where(x => x.Name == p.Name)
+                .FirstOrDefault().SpaceShipID = null;
+
             context.SaveChanges();
         }
 
@@ -202,6 +224,7 @@ namespace SpacePark
         {
             using (var context = new SpaceParkContext())
             {
+                // Finds the ship in the person table and set it to null.
                 context.ParkingLot.Where(x => x.SpaceShipID == spaceShip.SpaceShipID)
                     .FirstOrDefault()
                     .SpaceShip = null;
@@ -215,13 +238,13 @@ namespace SpacePark
         {
             try
             {
-                var freespace=FindAvailableParkingSpace().Result;
+                // när används freespace?
+                var freespace = FindAvailableParkingSpace().Result;
                 CheckIn();
             }
             catch (Exception)
             {
                 Console.WriteLine("There aren't parking spaces available ");
-
             }
         }
 
@@ -229,6 +252,8 @@ namespace SpacePark
         {
             using (var context = new SpaceParkContext())
             {
+                // Finds the person in the people table and checks if the value of hasPaid is true or false,
+                // then returns that value.
                 var hasPaid = context
                     .People
                     .Where(x => x.Name == p.Name)
@@ -238,7 +263,6 @@ namespace SpacePark
                 {
                     return true;
                 }
-
                 return false;
             }
 
@@ -250,27 +274,32 @@ namespace SpacePark
             {
                 Console.WriteLine();
 
-                context.People
-                    .Where(x => x.Name == p.Name)
-                    .FirstOrDefault()
-                    .HasPaid = true;
+                // If the person has not payed, change the value of hasPaid to true in the people table.
+                if (!(HasPersonPaid(p).Result))
+                {
+                    context.People
+                        .Where(x => x.Name == p.Name)
+                        .FirstOrDefault()
+                        .HasPaid = true;
+
+                    Console.WriteLine("Parking has been paid & you are now ready to check out!");
+                    Thread.Sleep(2500);
+                }
+                else
+                {
+                    Console.WriteLine("You have already paid!");
+                    Thread.Sleep(2500);
+                }
 
                 context.SaveChanges();
-
-
             }
-                if (p.HasPaid)
-                {
-                    Console.WriteLine($"Parking has been paid & you are now ready to check out!");
-                    Thread.Sleep(2500);
-                    Console.WriteLine();
-                }
         }
 
         public static async Task<Person> GetPersonFromDatabase(string name)
         {
             using (var context = new SpaceParkContext())
             {
+                // return the person object from the people table with a matching name.
                 return context.People
                      .Where(x => x.Name == name)
                      .FirstOrDefault();
