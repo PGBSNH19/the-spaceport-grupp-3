@@ -50,6 +50,7 @@ namespace SpacePark
 
         public async static Task<bool> IsPersonInDatabase(string name)
         {
+            // Returns true if a person with tha maching name is stored in the people table.
             using (var context = new SpaceParkContext())
             {
                 if (context.People.FirstOrDefault().Name == name)
@@ -70,7 +71,7 @@ namespace SpacePark
                 {
                     currentSpace = FindAvailableParkingSpace().Result;
                    
-                    // If the ship is smaller than the parkingspace park in the space.
+                    // If the ship is smaller than the parkingspace park in the space => park it.
                     if (double.Parse(p.CurrentShip.Length) <= currentSpace.Length)
                     {
                         context.ParkingLot.Where(x => x.ParkingLotID == currentSpace.ParkingLotID)
@@ -111,6 +112,7 @@ namespace SpacePark
 
         public static async Task WriteParkingSpaceToDataBase()
         {
+            // Adds 10 rows to the parkinglot table.
             using (var context = new SpaceParkContext())
             {
                 for (int i = 0; i < 10; i++)
@@ -150,7 +152,7 @@ namespace SpacePark
                     Console.WriteLine($"{count}.{s.Name}");
                 }
 
-                // Choise of ship.
+                // Saves the users selection.
                 var shipNumber = int.Parse(Console.ReadLine());
 
                 // Actually creates the ship object.
@@ -163,7 +165,7 @@ namespace SpacePark
 
             else if (!ParkingEngine.IsValidPerson(name))
             {
-                Console.WriteLine("Sorry you have to be a member of Star Wars to park here");
+                Console.WriteLine("Sorry you have to have been in Star Wars to park here.");
                 Thread.Sleep(2500);
             }
 
