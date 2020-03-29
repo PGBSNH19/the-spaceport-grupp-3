@@ -37,25 +37,31 @@ namespace SpacePark
             Console.CursorVisible = false;
 
             ConsoleKey? key = null;
+            //Until the user presses enter the loop will continue to run
             while (key != ConsoleKey.Enter)
             {
+                
+                //Keeps track of what position the cursor has 
                 if (key != null)
                 {
                     Console.CursorLeft = 0;
                     Console.CursorTop = Console.CursorTop - options.Length;
                 }
 
+                //Change the color at the cursor position
                 for (int i = 0; i < options.Length; i++)
                 {
                     var option = options[i];
                     if (i == selected)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
+                        
                     }
                     Console.WriteLine("- " + option);
                     Console.ResetColor();
                 }
 
+                //Moves the cursor up or down
                 key = Console.ReadKey().Key;
                 if (key == ConsoleKey.DownArrow)
                 {
@@ -68,10 +74,11 @@ namespace SpacePark
             }
 
             Console.CursorVisible = true;
+
+            //Return the selected option as lowercase
             return options[selected].ToLower();
         }
 
-        // HUNGERIAN NOTATION?
         public static void MenuSwitch(string input)
         {
             string name;
