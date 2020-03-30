@@ -10,8 +10,8 @@ using SpacePark.DatabaseModels;
 namespace SpacePark.Migrations
 {
     [DbContext(typeof(SpaceParkContext))]
-    [Migration("20200323144001_Initial")]
-    partial class Initial
+    [Migration("20200325124432_asd")]
+    partial class asd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

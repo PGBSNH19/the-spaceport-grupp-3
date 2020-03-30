@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Globalization;
 
 
 
@@ -13,28 +14,21 @@ namespace SpacePark
         public static void Main(string[] args)
         {
 
+            CultureInfo.CurrentCulture = new CultureInfo("en-US", true);
+            //Make sure there are parkingspaces in the database
+            ParkingEngine.WriteParkingSpaceToDataBase();
+            
+            // Menu
+            Console.ReadLine();
             while (true)
             {
                 Menu.MenuHeader();
-                Menu.MenuSwitch(Menu.MenuOptions("Check in", "Check out", "Pay"));
+                Console.WriteLine();
+                Menu.MenuSwitch(Menu.MenuOptions("Check in", "Pay", "Check out"));
                 Console.Clear();
             }
-
-
-
-
-            //var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("Configuration.json");
-            //var config = builder.Build();
-
-            // var defaultConnectionString = config.GetConnectionString("DefaultConnection");
-
-
-            //var spacepark = new ParkingEngine();
-            //var starship = spacepark.IsValidPerson("Luke");
-            //Console.WriteLine(starship.ShipLength);
-            //Console.WriteLine(starship.Name);
         }
 
-       
+
     }
 }

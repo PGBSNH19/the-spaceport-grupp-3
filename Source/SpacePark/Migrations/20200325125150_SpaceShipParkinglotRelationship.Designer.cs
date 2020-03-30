@@ -10,8 +10,8 @@ using SpacePark.DatabaseModels;
 namespace SpacePark.Migrations
 {
     [DbContext(typeof(SpaceParkContext))]
-    [Migration("20200323144001_Initial")]
-    partial class Initial
+    [Migration("20200325125150_SpaceShipParkinglotRelationship")]
+    partial class SpaceShipParkinglotRelationship
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,10 +31,12 @@ namespace SpacePark.Migrations
                     b.Property<int>("Length")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SpaceShipId")
+                    b.Property<int?>("SpaceShipID")
                         .HasColumnType("int");
 
                     b.HasKey("ParkingLotID");
+
+                    b.HasIndex("SpaceShipID");
 
                     b.ToTable("ParkingLots");
                 });
@@ -75,6 +77,13 @@ namespace SpacePark.Migrations
                     b.HasKey("SpaceShipID");
 
                     b.ToTable("SpaceShips");
+                });
+
+            modelBuilder.Entity("SpacePark.ParkingLot", b =>
+                {
+                    b.HasOne("SpacePark.SpaceShip", "SpaceShip")
+                        .WithMany()
+                        .HasForeignKey("SpaceShipID");
                 });
 
             modelBuilder.Entity("SpacePark.Person", b =>

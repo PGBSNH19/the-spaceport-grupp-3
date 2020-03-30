@@ -10,8 +10,8 @@ using SpacePark.DatabaseModels;
 namespace SpacePark.Migrations
 {
     [DbContext(typeof(SpaceParkContext))]
-    [Migration("20200323144001_Initial")]
-    partial class Initial
+    [Migration("20200325145521_changepplid")]
+    partial class changepplid
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,12 +31,14 @@ namespace SpacePark.Migrations
                     b.Property<int>("Length")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SpaceShipId")
+                    b.Property<int?>("SpaceShipID")
                         .HasColumnType("int");
 
                     b.HasKey("ParkingLotID");
 
-                    b.ToTable("ParkingLots");
+                    b.HasIndex("SpaceShipID");
+
+                    b.ToTable("ParkingLot");
                 });
 
             modelBuilder.Entity("SpacePark.Person", b =>
@@ -46,15 +48,16 @@ namespace SpacePark.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CurrentShipSpaceShipID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SpaceShipID")
+                        .HasColumnType("int");
+
                     b.HasKey("PersonID");
 
-                    b.HasIndex("CurrentShipSpaceShipID");
+                    b.HasIndex("SpaceShipID")
+                        .IsUnique();
 
                     b.ToTable("People");
                 });
@@ -66,22 +69,31 @@ namespace SpacePark.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Length")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ShipLength")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SpaceShipID");
 
                     b.ToTable("SpaceShips");
                 });
 
+            modelBuilder.Entity("SpacePark.ParkingLot", b =>
+                {
+                    b.HasOne("SpacePark.SpaceShip", "SpaceShip")
+                        .WithMany()
+                        .HasForeignKey("SpaceShipID");
+                });
+
             modelBuilder.Entity("SpacePark.Person", b =>
                 {
                     b.HasOne("SpacePark.SpaceShip", "CurrentShip")
-                        .WithMany()
-                        .HasForeignKey("CurrentShipSpaceShipID");
+                        .WithOne("PersonID")
+                        .HasForeignKey("SpacePark.Person", "SpaceShipID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
